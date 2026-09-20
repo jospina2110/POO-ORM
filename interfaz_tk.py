@@ -56,7 +56,6 @@ class ObservadorToast(ObservadorEquipo):
         super().__init__()
         self._app = app
 
-    def equipo_cambido(self, equipo: MotoGP) -> None:
         color = '#0a7d0a' if equipo.equipo_completo else '#606060'
         estado = ("EQUIPO APROBADO (2 pilotos, AprobadorAutomatico)"
                   if equipo.equipo_completo
@@ -69,8 +68,9 @@ class ObservadorToast(ObservadorEquipo):
 # Pestana 1 - Equipos (CRUD 1:1 contra EquipoModel)
 # =============================================================================
 class PestanaEquipos(ttk.Frame):
-    def __init__(self, app: 'InterfazMotoTk') -> None:
-        super().__init__(app._notebook)
+    def __init__(self, maestro: ttk.Notebook,
+                 app: 'InterfazMotoTk') -> None:
+        super().__init__(maestro)
         self._app = app
 
         columnas = ("id", "nombre_equipo", "marca_moto", "nombre_ing_jefe",
@@ -461,8 +461,7 @@ class PestanaPreferencias(ttk.Frame):
 class PestanaReportes(ttk.Frame):
     COLUMNAS = ("titulo", "valor")
 
-    def __init__(self, maestro: ttk.Notebook,
-                 app: 'InterfazMotoTk') -> None:
+    def __init__(self, app: 'InterfazMotoTk') -> None:
         super().__init__(maestro)
         self._app = app
         self._tree = ttk.Treeview(self, columns=self.COLUMNAS,

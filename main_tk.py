@@ -26,6 +26,7 @@ from database import DatabaseManager
 from interfaz_tk import InterfazMotoTk
 
 
+
 def _main() -> None:
     gestor = DatabaseManager()
     gestor.conectar()
