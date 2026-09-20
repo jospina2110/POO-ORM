@@ -22,6 +22,7 @@ Requiere :  MySQL en docker (docker-compose.yml) exactamente igual que
 ============================================================================
 """
 
+import tkinter as tk
 from database import DatabaseManager
 from interfaz_tk import InterfazMotoTk
 
@@ -31,8 +32,9 @@ def _main() -> None:
     gestor = DatabaseManager()
     gestor.conectar()
     gestor.crear_tablas()
-    inter = InterfazMotoTk(gestor)
-    inter.ejecutar()
+    raiz = tk.Tk()
+    InterfazMotoTk(raiz, gestor)
+    raiz.mainloop()
 
 
 if __name__ == "__main__":
