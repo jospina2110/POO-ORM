@@ -56,6 +56,10 @@ class ObservadorToast(ObservadorEquipo):
         super().__init__()
         self._app = app
 
+    def equipo_cambido(self, equipo: 'MotoGP') -> None:
+        """Implementacion del metodo abstracto del dominio: refresca la barra
+        de estado de la GUI en lugar de solo imprimir (2do observador del
+        mismo sujeto: 1 del dominio, 1 de la presentacion)."""
         color = '#0a7d0a' if equipo.equipo_completo else '#606060'
         estado = ("EQUIPO APROBADO (2 pilotos, AprobadorAutomatico)"
                   if equipo.equipo_completo
@@ -461,7 +465,8 @@ class PestanaPreferencias(ttk.Frame):
 class PestanaReportes(ttk.Frame):
     COLUMNAS = ("titulo", "valor")
 
-    def __init__(self, app: 'InterfazMotoTk') -> None:
+    def __init__(self, maestro: ttk.Notebook,
+                 app: 'InterfazMotoTk') -> None:
         super().__init__(maestro)
         self._app = app
         self._tree = ttk.Treeview(self, columns=self.COLUMNAS,
